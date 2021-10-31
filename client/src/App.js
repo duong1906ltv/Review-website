@@ -23,7 +23,7 @@ function App() {
         <Route path="/Posts" exact component = {AllPost}/>
         <Route path="/Posts/:id" exact component = {PostByID}/>
         <Route path="/Details" exact component = {Details}/>
-        <Route path="/WriteReview" exact component = {WriteReview}/>
+        {/* <Route path="/WriteReview" exact component = {WriteReview}/> */}
       </Switch>
     </Router>
     {/* <Router> 
