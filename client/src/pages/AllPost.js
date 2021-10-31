@@ -34,9 +34,14 @@ function AllPost() {
                     )
                 })}
             </main>
-            <aside class="p2-aside">
-                <section class="p2-aside__section">
-                    <h3 class="p2-heading-3">Phổ biến</h3>
+            <aside class="p2-aside"> 
+                <div class="p2-aside__header">
+                    <label for="popular-tab" class="p2-aside__tab"><h3 class="p2-heading-3">Phổ biến</h3></label>
+                    <label for="newest-tab" class="p2-aside__tab"><h3 class="p2-heading-3">Gần đây</h3></label>
+                </div>
+                <input type="radio" id="popular-tab" name="aside-tab" class="p2-popular-tab" checked/>
+                <input type="radio" id="newest-tab" name="aside-tab" class="p2-newest-tab"/>
+                <section class="p2-aside__section p2-aside__section--popular">
                     <div class="p2-aside__item">
                         <div class="p2-aside__image-box">
                             <img class="p2-aside__image" src="https://dulichchat.com/wp-content/uploads/2019/11/woodstock-coffee.jpg" alt=""/>
@@ -68,8 +73,7 @@ function AllPost() {
                         </div>
                     </div>
                 </section>
-                <section class="p2-aside__section">
-                    <h3 class="p2-heading-3">Gần đây</h3>
+                <section class="p2-aside__section p2-aside__section--newest">
                     <div class="p2-aside__item">
                         <div class="p2-aside__image-box">
                             <img class="p2-aside__image" src="https://dulichchat.com/wp-content/uploads/2021/10/khu-nghi-duong-new-world-phu-quoc-dulichchat-7-390x220.jpg" alt="newest1"/>

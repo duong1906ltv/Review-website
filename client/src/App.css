@@ -312,11 +312,10 @@ body {
   font-family: "Poppins", sans-serif !important;
   font-weight: 300;
   line-height: 1.6;
-  
 }
 
 a {
-  color:inherit;
+  color: inherit;
 }
 
 .nav-header {
@@ -396,7 +395,7 @@ a {
   display: none;
 }
 
-.nav__checkbox:checked ~ .nav-acc{
+.nav__checkbox:checked ~ .nav-acc {
   display: flex;
 }
 
@@ -426,7 +425,6 @@ a {
 .nav-acc__link:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-
 
 .section-menu {
   display: flex;
@@ -483,7 +481,7 @@ a {
 .p2-paragraph {
   font-size: 1.4rem;
   color: grey;
-  overflow:hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -537,7 +535,6 @@ a:visited {
 
 .p2-brief-post__content {
   width: 50%;
-  height: min-content;
   padding: 1rem;
   margin-left: 2rem;
 }
@@ -565,7 +562,7 @@ a:visited {
 }
 
 .p2-btn.btn--black:hover {
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
 }
 
@@ -584,11 +581,64 @@ a:visited {
   margin: 2rem 0 0 2rem;
 }
 
-.p2-aside__section {
-  height: 50%;
+.p2-aside__header {
+  display: flex;
+  width: 100%;
+  height: 5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
-.aside__item {
+.p2-aside__tab {
+  display: block;
+  height: 100%;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.p2-aside__tab:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.p2-aside__tab:not(:last-child) {
+  border-right: 1px solid #000;
+}
+
+.p2-aside__tab .p2-heading-3 {
+  line-height: 5rem;
+  font-weight: 500;
+}
+
+.p2-popular-tab,
+.p2-newest-tab {
+  display: none;
+}
+
+.p2-popular-tab:checked ~ .p2-aside__section--popular {
+  display: block;
+}
+
+.p2-popular-tab:checked ~ .p2-aside__section--newest {
+  display: none;
+}
+
+.p2-newest-tab:checked ~ .p2-aside__section--newest {
+  display: block;
+}
+
+.p2-newest-tab:checked ~ .p2-aside__section--popular {
+  display: none;
+}
+
+.p2-aside__section {
+  height: min-content;
+}
+
+.p2-aside__item {
   display: flex;
   margin-bottom: 1rem;
 }
@@ -613,15 +663,15 @@ a:visited {
 
 @media screen and (max-width: 896px) {
   .p2-content {
-      flex-direction: column;
+    flex-direction: column;
   }
   .p2-main {
-      width: 100%;
+    width: 100%;
   }
   .p2-aside {
-      width: 100%;
-      height: 50rem;
-      margin-left: 0;
+    width: 100%;
+    height: 50rem;
+    margin-left: 0;
   }
 }
 
@@ -827,11 +877,11 @@ html {
 /* ----------------------CSS for Login------------------------------------------ */
 .login {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('https://wallpapercave.com/wp/wp1835743.jpg');
+  background-image: url("https://wallpapercave.com/wp/wp1835743.jpg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -840,11 +890,11 @@ html {
 .signup {
   height: 150vh;
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('https://wallpapershome.com/images/pages/pic_h/16681.jpg');
+  background-image: url("https://wallpapershome.com/images/pages/pic_h/16681.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -936,7 +986,6 @@ form {
   padding: 13px;
   text-align: center;
   min-width: 50px;
-  
 }
 
 .login .icon-social {
@@ -980,18 +1029,19 @@ form {
   border-radius: 3px;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   padding: 12px 20px;
   margin: 12px;
   height: 25px;
   width: 25px;
 }
 
-.signup input[type=checkbox] {
+.signup input[type="checkbox"] {
   transform: translateY(7px);
 }
 
-label[for=policy] a:link, label[for=policy] a:visited {
+label[for="policy"] a:link,
+label[for="policy"] a:visited {
   text-decoration: none;
   color: yellow;
 }
@@ -1003,7 +1053,7 @@ label[for=policy] a:link, label[for=policy] a:visited {
   border: none;
   border-radius: 3px;
   background-color: #ffc312;
-  font-family: 'Numans', sans-serif;
+  font-family: "Numans", sans-serif;
 }
 
 .login .btn {
@@ -1057,14 +1107,15 @@ footer p {
   line-height: 56px;
 }
 
-footer p a:link, footer p a:visited {
+footer p a:link,
+footer p a:visited {
   text-decoration: none;
   color: #000;
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .col-1-of-2 {
-      width: 90%;
+    width: 90%;
   }
 }
 
@@ -1082,8 +1133,6 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
-
-
 
 /* .container {
   display: grid;
@@ -1355,7 +1404,6 @@ html {
   height: 20rem;
 }
 
-
 /*-----------------------------CSS for details---------------------*/
 .details-container {
   display: flex;
@@ -1613,7 +1661,6 @@ html {
 
 /*------------------------------CSS for write review---------------------------*/
 
-
 *,
 *::before,
 *::after {
@@ -1729,45 +1776,6 @@ a {
   height: 8rem;
   background-color: #000;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 *,
 *::before,
@@ -2032,4 +2040,3 @@ body {
   overflow: hidden;
   white-space: nowrap;
 }
-
