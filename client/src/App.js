@@ -11,6 +11,7 @@ import AllPost from './pages/AllPost';
 import PostByID from './pages/PostByID';
 import Details from './pages/Details';
 import WriteReview from './pages/WriteReview';
+import MiddlePage from './pages/MiddlePage';
 function App() {
   return (
     <div> 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Login" exact component={Login} />
         <Route path="/Signup" exact component={registration} />
         <Route path="/Posts" exact component = {AllPost}/>
+        <Route path="/Middle" exact component = {MiddlePage}/>
         <Route path="/Posts/:id" exact component = {PostByID}/>
         <Route path="/Details" exact component = {Details}/>
         <Route path="/WriteReview" exact component = {WriteReview}/>
