@@ -1,23 +1,18 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
+import CommentForm from './CommentForm'
 
 
-function Comment({comment,replies}) {
-    const [listOfComments, setListofCommnents] = useState([])
-    useEffect(()=>{
-        axios.get("http://localhost:3001/GetComment").then((response)=>{
-          setListofCommnents(response.data);
-        })
-        console.log(listOfComments) 
-      })
-    const getReplies = commentId =>{
-        return listOfComments
-            .filter(listOfComments => listOfComments.parent_id === commentId)
-            .sort(
-                (a,b)=>
-                    new Date(a.createAt).getTime() - new Date(b.createAt).getTime()
-            )
-    }
+function Comment({comment,replies,currentUserId,createComment,deleteComment,activeComment,setActiveComment,parent_id = null}) {
+    const fiveMinutes = 300000
+    const timePassed = new Date() - new Date(comment.createAt) > fiveMinutes
+    const canReply = Boolean(currentUserId)
+    const canEdit = currentUserId === comment.user_id && !timePassed
+    const canDelete = currentUserId === comment.user_id && !timePassed
+    const createAt = new Date(comment.createAt).toLocaleDateString();
+    const isReplying = activeComment && activeComment.type === "replying" && activeComment.id === comment.comment_id
+    const isEditing = activeComment && activeComment.type === "editing" && activeComment.id === comment.comment_id
+    const replyId = parent_id ? parent_id : comment.comment_id
     return(
         <div class="comment__item">
             <div class="acc">
@@ -29,33 +24,46 @@ function Comment({comment,replies}) {
                         <span>{comment.user_name}</span>
                     </div>
                     <div class="comment__time">
-                        <span>{comment.createAt}</span>
+                        <span>{createAt}</span>
                     </div>
                 </div>
             </div>
             <div class="comment__box">
                 <p class="paragraph">{comment.body}</p>
-                <label for="reply__toggle2" class="reply__link">Reply</label>
+                {canReply && 
+                    <label for="reply__toggle2" 
+                    class="reply__link"
+                    onClick = {()=>{
+                        setActiveComment({id:comment.comment_id, type:"replying"})
+                        console.log(activeComment)
+                    }}
+                    >Reply
+                    </label>}
+                {canEdit && 
+                    <label for="reply__toggle2" 
+                    class="reply__link"
+                    onClick = {()=>{
+                        setActiveComment({id:comment.comment_id, type:"editing"})
+                    }}
+                    >Edit</label>}
+                {canDelete && <label for="reply__toggle2" class="reply__link" onClick = {() => deleteComment(comment.comment_id)}>Delete</label>}
             </div>
-            <input type="checkbox" class="reply__checkbox" id="reply__toggle2"/>
-            <div class="comment__reply">
-                <div class="acc__shape">
-                    <img src="./img/ava2.jpg" alt="ava1" class="acc__ava"/>
-                </div>
-                <textarea type="text" class="comment__input"></textarea>
-                <div class="comment__option">
-                    <div class="comment__option--no">
-                        <span>Cancel</span>
-                    </div>
-                    <div class="comment__option--yes">
-                        <span>Comment</span>
-                    </div>
-                </div>
-            </div>
+            {isReplying && (
+                <CommentForm submitLabel = "Reply" handleSubmit= {(text)=>createComment(text,replyId)}/>
+            )}
             {replies.length>0 && (
                 <div class="reply__comment">
                     {replies.map(reply =>(
-                        <Comment comment = {reply} replies ={getReplies(reply.comment_id)}/>
+                        <Comment 
+                        comment = {reply} 
+                        replies ={[]} 
+                        currentUserId = {currentUserId}
+                        deleteComment = {deleteComment}
+                        parent_id = {comment.comment_id}
+                        createComment = {createComment}
+                        activeComment = {activeComment}
+                        setActiveComment = {setActiveComment}
+                        />
                     ))}
                 </div>
             )}

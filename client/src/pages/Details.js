@@ -5,11 +5,11 @@ import Comment from '../component/Comment'
 function Details() {
     const [listOfComments, setListofCommnents] = useState([])
     const [bodyComment, setBodyComment] = useState([])
-    useEffect(()=>{
-        axios.get("http://localhost:3001/GetComment").then((response)=>{
-          setListofCommnents(response.data);
-        })
-      })
+    
+    axios.get("http://localhost:3001/GetComment").then((response)=>{
+        setListofCommnents(response.data);
+    })
+    
     const rootComments = listOfComments.filter(
         (listOfComments) => listOfComments.parent_id ==null
     )
@@ -22,14 +22,15 @@ function Details() {
             )
     }
     const CreateComment = () =>{
-        const data = {bodyComment:bodyComment}
-        alert("OK")
+        var today = new Date(),
+        currentTime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()+' '+today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+        const data = {bodyComment:bodyComment, createAt : currentTime, parent_id: null}
         console.log(data)
         axios.post("http://localhost:3001/CreateComment",data,{headers: {
             accessToken : localStorage.getItem("accessToken")
         }}).then(res =>{
-          alert(res)
-        });
+          setListofCommnents([res, ...listOfComments])
+        });  
     }
     return (
         <div class="details-container">

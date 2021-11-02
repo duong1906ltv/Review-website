@@ -1,35 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useContext } from 'react'
 import {Link,BrowserRouter as Router,Route,Switch} from 'react-router-dom'
-import Login from './Login';
-import Registration from './registration';
 import { AuthContext } from '../helpers/AuthContext';
 import { useState } from 'react';
 import axios from 'axios';
-import Home from './Home';
+
 
 function Nav() {
-    const [authState,setAuthState] = useState({
-        username: "",
-        id: 0,
-        status: false
-    })
-    
-    useEffect(()=>{
-        axios.get("http://localhost:3001/auth",{headers: {
-            accessToken : localStorage.getItem("accessToken")
-        }}).then((response)=>{
-            console.log(response.data)
-            if (response.data.error){
-                setAuthState({...authState,status:false});
-            } else{
-                setAuthState({
-                    username: response.data.username,
-                    id: response.data.id,
-                    status: true
-                });
-            }
-        })
-    })
+       
+    const { authState, setAuthState } = useContext(AuthContext);
     const logout = () => {
         localStorage.removeItem("accessToken")
         setAuthState({
@@ -39,9 +17,8 @@ function Nav() {
         })
     }
     return (
-        
         <header class="nav-header">
-            <AuthContext.Provider value = {{authState,setAuthState}}>
+            <AuthContext.Provider>
             <div class="nav-logo-box">
                 <Link to="/" class="nav-logo">404-NOT FOUND</Link>
             </div>

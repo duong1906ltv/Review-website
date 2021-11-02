@@ -18,6 +18,11 @@ function Login() {
             alert(response.data.error)
           }
         localStorage.setItem("accessToken",response.data.token)
+        setAuthState({
+            username: response.data.username,
+            id: response.data.id,
+            status: true,
+          });
     })
     history.push('/')
   }

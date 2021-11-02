@@ -37,7 +37,7 @@ db.connect(function(err) {
 
 
 app.post("/register",(req,res) => {
-    const username = req.body.username;
+    const username = req.body.username; 
     const password = req.body.password;
     bcrypt.hash(password,saltRounds,(err,hash) => {
         db.query(
@@ -233,21 +233,32 @@ app.get("/GetComment",(req,res) => {
 app.post("/CreateComment",validateToken,(req,res) => {
     const body = req.body.bodyComment;
     const parent_id = req.body.parent_id;
-    const createAt = Date.now();
+    const createAt = req.body.createAt;
     const user_id = req.user.id;
-    console.log(req.body)
-    console.log(parent_id)
-    console.log(createAt)
-    console.log(user_id)
-    // db.query("insert into comment(body,user_id,parent_id,createAt) values (?,?,?,?,?,?)",
-    //         [body,user_id,parent_id,createAt],
-    //         (err) => {
-    //             if(err){
-    //                 res.json("error:",err)
-    //             }
-    //             res.json("SUCCESS create a comment")
-    //         }
-    // )
+    console.log(req.body.createAt)   
+    db.query("insert into comment(body,user_id,parent_id,createAt) values (?,?,?,?)", 
+            [body,user_id,parent_id,createAt],
+            (err) => {
+                if(err){
+                    res.json("error:",err)
+                }
+                res.json("SUCCESS create a comment")
+            }
+    )
+})
+
+
+app.delete("/DeleteComment/:id",(req,res)=>{
+    const comment_id = req.params.id;
+    db.query("DELETE FROM comment WHERE comment_id = ?", 
+            comment_id,
+            (err) => {
+                if(err){
+                    res.json("error:",err)
+                }
+                res.json("SUCCESS Delete a comment")
+            } 
+    )
 })
 
 

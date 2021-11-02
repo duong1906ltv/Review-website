@@ -1,20 +1,44 @@
-import { useEffect,useState } from 'react';
+import React, { useEffect,useState } from 'react'
 import './App.css';
-import axios from 'axios';
 import  {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import Nav from './pages/Nav';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import registration from './pages/registration';
-import Footer from './pages/Footer';
 import AllPost from './pages/AllPost';
 import PostByID from './pages/PostByID';
-import Details from './pages/Details';
+import NewDetails from './pages/NewDetails';
 import WriteReview from './pages/WriteReview';
 import MiddlePage from './pages/MiddlePage';
+import Test from './component/Test';
+import { AuthContext } from './helpers/AuthContext';
+import axios from 'axios';
 function App() {
+  const [authState,setAuthState] = useState({
+      username: "",
+      id: 0,
+      status: false
+  })
+
+  useEffect(()=>{
+      axios.get("http://localhost:3001/auth",{headers: {
+          accessToken : localStorage.getItem("accessToken")
+      }}).then((response)=>{
+          if (response.data.error){
+              setAuthState({...authState,status:false});
+          } else{
+              setAuthState({
+                  username: response.data.username,
+                  id: response.data.id,
+                  status: true
+              });
+          }
+      })
+
+  })
   return (
-    <div> 
+    <div>
+    <AuthContext.Provider value = {{authState,setAuthState}}> 
     <Router>
       <Nav/>
       <Switch>
@@ -25,20 +49,12 @@ function App() {
         <Route path="/Posts" exact component = {AllPost}/>
         <Route path="/Middle" exact component = {MiddlePage}/>
         <Route path="/Posts/:id" exact component = {PostByID}/>
-        <Route path="/Details" exact component = {Details}/>
+        <Route path="/Details" exact component = {NewDetails}/>
         <Route path="/WriteReview" exact component = {WriteReview}/>
+        <Route path="/Test" exact component = {Test}/>
       </Switch>
     </Router>
-    {/* <Router> 
-      <Nav/>
-      <Switch> 
-        <Route path = "/user/manage" component= {ManageUser}/>
-        <Route path = "/user/add" component = {AddUser}/>
-      </Switch>
-      
-      <Footer/>
-    </Router> */}
-    
+    </AuthContext.Provider>
     </div>
     
   );

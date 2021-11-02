@@ -1625,7 +1625,7 @@ html {
 }
 
 .reply__link {
-  display: block;
+  display: flex;
   color: palevioletred;
   margin-top: 2rem;
   font-weight: 400;

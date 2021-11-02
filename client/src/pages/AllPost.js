@@ -10,7 +10,6 @@ function AllPost() {
       axios.get("http://localhost:3001/GetAllPost").then((response)=>{
         setListOfPosts(response.data);
       })
-      console.log(listOfPosts) 
     })
     return (
         <div class="p2-container">
