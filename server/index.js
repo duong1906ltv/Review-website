@@ -220,6 +220,17 @@ app.post("/upload", upload.single('file'),validateToken, (req, res) => {
 });
 
 
+app.get("/GetComment",(req,res) => {
+    db.query("SELECT comment_id,user.user_id,user_name,body,createAt,parent_id FROM comment INNER JOIN user ON comment.user_id = user.user_id",
+            (err,result) => {
+                if(err){
+                    res.json("error:",err)
+                }
+                res.json(result)
+            }
+    )
+})
+
 
  
 
