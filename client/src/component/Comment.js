@@ -1,6 +1,23 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import axios from 'axios'
+
 
 function Comment({comment,replies}) {
+    const [listOfComments, setListofCommnents] = useState([])
+    useEffect(()=>{
+        axios.get("http://localhost:3001/GetComment").then((response)=>{
+          setListofCommnents(response.data);
+        })
+        console.log(listOfComments) 
+      })
+    const getReplies = commentId =>{
+        return listOfComments
+            .filter(listOfComments => listOfComments.parent_id === commentId)
+            .sort(
+                (a,b)=>
+                    new Date(a.createAt).getTime() - new Date(b.createAt).getTime()
+            )
+    }
     return(
         <div class="comment__item">
             <div class="acc">
@@ -36,9 +53,9 @@ function Comment({comment,replies}) {
                 </div>
             </div>
             {replies.length>0 && (
-                <div>
+                <div class="reply__comment">
                     {replies.map(reply =>(
-                        <Comment comment = {reply} replies ={reply.comment_id}/>
+                        <Comment comment = {reply} replies ={getReplies(reply.comment_id)}/>
                     ))}
                 </div>
             )}

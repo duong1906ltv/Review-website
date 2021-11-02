@@ -1596,7 +1596,7 @@ html {
   margin-bottom: 3rem;
 }
 
-.comment__item > .comment__item {
+.reply__comment {
   width: 90%;
   margin: 2rem 0 0 auto;
 }

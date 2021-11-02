@@ -230,6 +230,25 @@ app.get("/GetComment",(req,res) => {
             }
     )
 })
+app.post("/CreateComment",validateToken,(req,res) => {
+    const body = req.body.bodyComment;
+    const parent_id = req.body.parent_id;
+    const createAt = Date.now();
+    const user_id = req.user.id;
+    console.log(req.body)
+    console.log(parent_id)
+    console.log(createAt)
+    console.log(user_id)
+    // db.query("insert into comment(body,user_id,parent_id,createAt) values (?,?,?,?,?,?)",
+    //         [body,user_id,parent_id,createAt],
+    //         (err) => {
+    //             if(err){
+    //                 res.json("error:",err)
+    //             }
+    //             res.json("SUCCESS create a comment")
+    //         }
+    // )
+})
 
 
  

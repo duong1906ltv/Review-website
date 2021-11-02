@@ -4,11 +4,11 @@ import Comment from '../component/Comment'
 
 function Details() {
     const [listOfComments, setListofCommnents] = useState([])
+    const [bodyComment, setBodyComment] = useState([])
     useEffect(()=>{
         axios.get("http://localhost:3001/GetComment").then((response)=>{
           setListofCommnents(response.data);
         })
-        console.log(listOfComments) 
       })
     const rootComments = listOfComments.filter(
         (listOfComments) => listOfComments.parent_id ==null
@@ -20,6 +20,16 @@ function Details() {
                 (a,b)=>
                     new Date(a.createAt).getTime() - new Date(b.createAt).getTime()
             )
+    }
+    const CreateComment = () =>{
+        const data = {bodyComment:bodyComment}
+        alert("OK")
+        console.log(data)
+        axios.post("http://localhost:3001/CreateComment",data,{headers: {
+            accessToken : localStorage.getItem("accessToken")
+        }}).then(res =>{
+          alert(res)
+        });
     }
     return (
         <div class="details-container">
@@ -89,13 +99,13 @@ function Details() {
                         <div class="acc__shape">
                             <img src="./img/ava2.jpg" alt="ava1" class="acc__ava"/>
                         </div>
-                        <textarea type="text" class="comment__input"></textarea>
+                        <textarea type="text" class="comment__input" onChange = {(e) => {setBodyComment(e.target.value)}}></textarea>
                         <div class="comment__option">
                             <div class="comment__option--no">
                                 <span>Cancel</span>
                             </div>
                             <div class="comment__option--yes">
-                                <span>Comment</span>
+                                <button onClick = {CreateComment}>Comment</button>
                             </div>
                         </div>
                     </div>
@@ -132,7 +142,7 @@ function Details() {
                                 </div>
                             </div>
                         </div>
-                        <div class="comment__item">
+                        <div class="reply__comment">
                             <div class="acc">
                                 <div class="acc__shape">
                                     <img src="./img/ava2.jpg" alt="ava1" class="acc__ava"/>
