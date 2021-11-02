@@ -2048,3 +2048,281 @@ body {
   overflow: hidden;
   white-space: nowrap;
 }
+
+/* ************** Middle Page ************* */
+.p3-heading-1 {
+  font-size: 3.5rem;
+  text-transform: capitalize;
+  font-weight: 800;
+}
+
+.p3-heading-2 {
+  font-size: 2.8rem;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.p3-heading-3 {
+  font-size: 2.5rem;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.p3-heading-4 {
+  font-size: 2.2rem;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.p3-heading-5 {
+  font-size: 1.7rem;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.p3-paragraph {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.p3-section-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+.p3-menu__area-box {
+  padding: 1rem 0;
+}
+
+.p3-menu__area {
+  color: lightcoral;
+}
+
+.p3-menu__option-box {
+  display: flex;
+}
+
+.p3-menu__option {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 1.2rem;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 25rem;
+}
+
+.p3-menu__option:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.p3-menu__option:hover > .p3-menu__link {
+  color: #fff;
+}
+
+.p3-menu__checkbox {
+  display: none;
+}
+
+.p3-menu__checkbox:checked ~ .p3-menu__option--sub {
+  display: flex;
+}
+
+.p3-menu__option--sub {
+  position: absolute;
+  top: 5rem;
+  left: 4rem;
+  width: 20rem;
+  display: none;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 2rem;
+  border-radius: 1.5rem;
+}
+
+.p3-menu__link {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.p3-menu__option--sub .p3-menu__link {
+  padding: 1rem 2rem;
+  color: #000;
+}
+
+.p3-menu__option--sub .p3-menu__link:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #000;
+}
+
+.p3-menu__icon {
+  display: inline-block;
+  font-size: 1.7rem;
+}
+
+.p3-section-area {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.p3-area__image-box {
+  width: 50%;
+  border-radius: 1rem 0 0 1rem;
+  overflow: hidden;
+}
+
+.p3-area__image {
+  display: block;
+  width: 100%;
+}
+
+.p3-area__content-box {
+  width: 50%;
+  border-radius: 0 1rem 1rem 0;
+  padding: 0 2rem;
+}
+
+.p3-area__content-box .p3-heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.p3-section-essentials {
+  margin-top: 5rem;
+}
+
+.p3-essentials__heading {
+  margin-bottom: 2rem;
+}
+
+.p3-essential {
+  height: 30rem;
+  margin-bottom: 5em;
+  display: flex;
+}
+
+.p3-essential__intro {
+  width: 25%;
+  padding-right: 1rem;
+}
+
+.p3-intro__heading {
+  margin-bottom: 1rem;
+}
+
+.p3-intro__content {
+  margin-bottom: 1rem;
+}
+
+.p3-intro__link {
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.p3-essential__items {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.p3-essential__item {
+  width: 32%;
+  position: relative;
+}
+
+.p3-item__link {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.p3-item__link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.p3-item__link:hover ~ .p3-item__info .p3-item__name {
+  text-decoration: underline;
+}
+
+.p3-item__image-box {
+  /* height: 70%; */
+}
+
+.p3-item__image {
+  display: block;
+  width: 100%;
+}
+
+.p3-item__info {
+  /* height: 30%; */
+}
+
+.p3-item__name {
+}
+
+.p3-item__point {
+  height: 3rem;
+}
+
+.p3-item__point-num {
+  margin-left: 1rem;
+  font-size: 1.3rem;
+  line-height: 3rem;
+}
+
+.p3-item__dot {
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background-color: lightcoral;
+  line-height: 3rem;
+  margin-right: 0.2rem;
+}
+
+.p3-item__address {
+  font-size: 1.3rem;
+}
+
+.p3-item__price {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 900px) {
+  .p3-section-area {
+    flex-direction: column;
+  }
+
+  .p3-area__image-box,
+  .p3-area__content-box {
+    width: 100%;
+  }
+
+  .p3-essential {
+    flex-direction: column;
+  }
+
+  .p3-essential__intro {
+    width: 100%;
+  }
+
+  .p3-essential__items {
+    width: 100%;
+  }
+}
