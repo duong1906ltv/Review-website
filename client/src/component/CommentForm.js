@@ -8,11 +8,11 @@ function CommentForm({handleSubmit, submitLabel}) {
         handleSubmit(text);
         setText("")
     }
-    return (
-        <form onSubmit = {onSubmit}>
+    return ( 
+        <form class="reply-form" onSubmit = {onSubmit}>
             <textarea 
                 class="comment__input"
-                value = {text}  
+                value = {text}   
                 onChange = {(e) => {setText(e.target.value)}}>
             </textarea>
             <div class="comment__option">

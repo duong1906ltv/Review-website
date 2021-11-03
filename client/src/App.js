@@ -10,7 +10,7 @@ import PostByID from './pages/PostByID';
 import NewDetails from './pages/NewDetails';
 import WriteReview from './pages/WriteReview';
 import MiddlePage from './pages/MiddlePage';
-import Test from './component/Test';
+// import Test from './component/Test';
 import { AuthContext } from './helpers/AuthContext';
 import axios from 'axios';
 function App() {
@@ -51,7 +51,7 @@ function App() {
         <Route path="/Posts/:id" exact component = {PostByID}/>
         <Route path="/Details" exact component = {NewDetails}/>
         <Route path="/WriteReview" exact component = {WriteReview}/>
-        <Route path="/Test" exact component = {Test}/>
+        {/* <Route path="/Test" exact component = {Test}/> */}
       </Switch>
     </Router>
     </AuthContext.Provider>

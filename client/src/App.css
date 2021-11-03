@@ -1541,7 +1541,7 @@ html {
 
 .comment__input {
   display: inline-block;
-  width: 85%;
+  width: 90%;
   height: 5rem;
   border: none;
   resize: none;
@@ -1590,6 +1590,29 @@ html {
 .comment__option--yes {
   color: #fff;
   background-color: rgba(110, 110, 110, 0.5);
+}
+
+.comment__option--yes button {
+  border: none;
+  color: #fff;
+  background-color: rgba(110, 110, 110, 0);
+  letter-spacing: 0.1rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.comment__input:focus + .comment__option .comment__option--yes button {
+  background-color: palevioletred;
+  color: #fff;
+  cursor: pointer;
+}
+
+.reply-form {
+  width: 90%;
+  display: inline-block;
+  background-color: #fff;
+  padding: 0 0 0 1rem;
 }
 
 .comment__item {
