@@ -11,6 +11,7 @@ const {validateToken} = require('../server/middlewares/AuthMiddleware')
 const saltRounds = 10
 const multer = require('multer')
 var path = require('path')
+const { count } = require('console')
 
 const app = express()
 
@@ -182,7 +183,18 @@ app.put("/UpdateUser",(req,res) =>{
 app.get("/auth",validateToken,(req,res) =>{
     res.json(req.user)
 })
-
+app.get("/getAllLikes/:id",(req,res) =>{
+    const post_id = req.params.id;
+    db.query("SELECT * FROM likes where post_id = ?",
+            [post_id],
+            (err,result) => {
+                if(err){
+                    res.json("error:",err)
+                }
+                res.json(result.length)
+            }   
+    )
+})
 app.listen(3001,() => {
     console.log("Server running on port 3001")
 })
@@ -190,7 +202,7 @@ app.listen(3001,() => {
 
 var storage = multer.diskStorage({
     destination: (req, file, callBack) => {
-        callBack(null, 'https://drive.google.com/drive/folders/1Ll1DbRqjbwWCDpTGP9TaCqpAJqmSwZ_B/')     // './public/images/' directory name where save the file
+        callBack(null, './public/images/')     // './public/images/' directory name where save the file
     },
     filename: (req, file, callBack) => {
         callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -246,17 +258,9 @@ app.post("/CreateComment/:post_id",validateToken,(req,res) => {
                 if(err){
                     res.json("error:",err)
                 }
+                res.json("SUCCESSS")
             }
     )
-    db.query("SELECT comment_id,user.user_id,nick_name,body,createAt,parent_id FROM comment INNER JOIN user ON comment.user_id = user.user_id where comment.post_id =? order by comment.comment_id desc",
-    [post_id],
-    (err,result) => {
-        if(err){
-            res.json("error:",err)
-        }
-        res.json(result[0])
-    }
-)
 })
 
 
@@ -275,6 +279,7 @@ app.delete("/DeleteComment/:id",(req,res)=>{
 app.put("/UpdateComment",(req,res) =>{
     const bodyComment = req.body.bodyComment;
     const comment_id = req.body.comment_id; 
+    console.log(req.body)
     db.query("UPDATE comment SET body = ? WHERE comment_id = ?",
             [bodyComment,comment_id],
             (err) => {
@@ -289,7 +294,7 @@ app.put("/UpdateComment",(req,res) =>{
 
 app.get("/Post/ByID/:id",(req,res)=>{
     const post_id = req.params.id;
-    db.query("SELECT * FROM posts WHERE post_id = ?", 
+    db.query("SELECT post_id,title,content,posts.user_id,posts.img_src,nick_name,img_ava FROM posts INNER JOIN user ON posts.user_id = user.user_id WHERE post_id = ?", 
             post_id,
             (err,result) => {
                 if(err){

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function MiddlePage() {
     return (
@@ -10,7 +11,7 @@ function MiddlePage() {
                     </div>
                     <div class="p3-menu__option-box">
                         <div class="p3-menu__option">
-                            <a href="#" class="p3-menu__link">Review Posts</a>
+                            <Link to="/Posts" class="p3-menu__link">Review Posts</Link>
                             <i class="far fa-comments p3-menu__icon"></i>
                         </div>
                         <label for="checkbox_toggle" class="p3-menu__checkbox-butotn">

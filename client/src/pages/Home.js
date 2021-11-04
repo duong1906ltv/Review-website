@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Home() {
     return (
@@ -44,7 +45,9 @@ function Home() {
                 </div>
                 <div class="region__photos">
                     <img src="https://docs.google.com/uc?id=1rbp0W6S1ZI5rHKeVitybBrrAYVg8IybU" alt="photo4" class="composition__photo"/>
-                    <img src="https://docs.google.com/uc?id=1Wamm_AFWICck3xgWCNrDFhUtg-WphlXQ" alt="photo5" class="composition__photo"/>
+                    <Link to = "/Middle" class = "new_classssss">
+                        <img src="https://docs.google.com/uc?id=1Wamm_AFWICck3xgWCNrDFhUtg-WphlXQ" alt="photo5" class="newimageclass"/>
+                    </Link>           
                     <img src="https://docs.google.com/uc?id=1wTrypinBQ8KkregkGP5z67q4X9ZZEa8v" alt="photo6" class="composition__photo"/>
                 </div>
             </div>
