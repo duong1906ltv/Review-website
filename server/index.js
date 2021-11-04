@@ -39,10 +39,11 @@ db.connect(function(err) {
 app.post("/register",(req,res) => {
     const username = req.body.username; 
     const password = req.body.password;
+    const nick_name = req.body.nick_name;
     bcrypt.hash(password,saltRounds,(err,hash) => {
         db.query(
-            "INSERT INTO account (username,password) VALUES(?,?)",
-            [username,hash],
+            "INSERT INTO user (username,password,nick_name) VALUES(?,?,?)",
+            [username,hash,nick_name],
             (err,res) => {
                 console.log(err);
             }
@@ -55,9 +56,10 @@ app.post("/login",(req,res) => {
     const password = req.body.password;
 
     db.query(
-        "SELECT * FROM account WHERE username = ? ;",
+        "SELECT * FROM user WHERE username = ? ;",
         username,
         (err,result) => {
+            console.log(result)
             if (err) {
                 res.send({err:err});
             }
@@ -65,10 +67,10 @@ app.post("/login",(req,res) => {
                 bcrypt.compare(password,result[0].password,(error,response)=>{
                     if (response){
                         const accessToken = sign(
-                            {username: result[0].username, id: result[0].account_id}, 
+                            {username: result[0].username, id: result[0].user_id, nick_name: result[0].nick_name}, 
                             "importantsecret"
                         );
-                        res.json({token: accessToken, username: result[0].username, id: result[0].account_id})
+                        res.json({token: accessToken, username: result[0].username, id: result[0].user_id,nick_name: result[0].nick_name})
                     } else{
                         res.json({error: "Wrong username/password combination"})
                     }
@@ -188,7 +190,7 @@ app.listen(3001,() => {
 
 var storage = multer.diskStorage({
     destination: (req, file, callBack) => {
-        callBack(null, './public/images/')     // './public/images/' directory name where save the file
+        callBack(null, 'https://drive.google.com/drive/folders/1Ll1DbRqjbwWCDpTGP9TaCqpAJqmSwZ_B/')     // './public/images/' directory name where save the file
     },
     filename: (req, file, callBack) => {
         callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -220,8 +222,10 @@ app.post("/upload", upload.single('file'),validateToken, (req, res) => {
 });
 
 
-app.get("/GetComment",(req,res) => {
-    db.query("SELECT comment_id,user.user_id,user_name,body,createAt,parent_id FROM comment INNER JOIN user ON comment.user_id = user.user_id",
+app.get("/GetComment/:id",(req,res) => {
+    const post_id = req.params.id
+    db.query("SELECT comment_id,user.user_id,nick_name,body,createAt,parent_id FROM comment INNER JOIN user ON comment.user_id = user.user_id where comment.post_id =? order by comment.createAt desc",
+            [post_id],
             (err,result) => {
                 if(err){
                     res.json("error:",err)
@@ -230,21 +234,29 @@ app.get("/GetComment",(req,res) => {
             }
     )
 })
-app.post("/CreateComment",validateToken,(req,res) => {
+app.post("/CreateComment/:post_id",validateToken,(req,res) => {
     const body = req.body.bodyComment;
     const parent_id = req.body.parent_id;
     const createAt = req.body.createAt;
     const user_id = req.user.id;
-    console.log(req.body.createAt)   
-    db.query("insert into comment(body,user_id,parent_id,createAt) values (?,?,?,?)", 
-            [body,user_id,parent_id,createAt],
+    const post_id = req.params.post_id;
+    db.query("insert into comment(body,user_id,parent_id,createAt,post_id) values (?,?,?,?,?)", 
+            [body,user_id,parent_id,createAt,post_id],
             (err) => {
                 if(err){
                     res.json("error:",err)
                 }
-                res.json("SUCCESS create a comment")
             }
     )
+    db.query("SELECT comment_id,user.user_id,nick_name,body,createAt,parent_id FROM comment INNER JOIN user ON comment.user_id = user.user_id where comment.post_id =? order by comment.comment_id desc",
+    [post_id],
+    (err,result) => {
+        if(err){
+            res.json("error:",err)
+        }
+        res.json(result[0])
+    }
+)
 })
 
 
@@ -260,7 +272,33 @@ app.delete("/DeleteComment/:id",(req,res)=>{
             } 
     )
 })
+app.put("/UpdateComment",(req,res) =>{
+    const bodyComment = req.body.bodyComment;
+    const comment_id = req.body.comment_id; 
+    db.query("UPDATE comment SET body = ? WHERE comment_id = ?",
+            [bodyComment,comment_id],
+            (err) => {
+                if(err){
+                    res.json("error:",err)
+                }
+                res.json("SUCCESS Update a comment") 
+            }
+    )
+})
 
+
+app.get("/Post/ByID/:id",(req,res)=>{
+    const post_id = req.params.id;
+    db.query("SELECT * FROM posts WHERE post_id = ?", 
+            post_id,
+            (err,result) => {
+                if(err){
+                    res.json("error:",err)
+                }
+                res.json(result[0])           
+            }           
+    )
+})
 
  
 

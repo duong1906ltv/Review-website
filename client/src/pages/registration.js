@@ -5,9 +5,10 @@ function Registration() {
         
     const [usernameReg,setUsernameReg] = useState("");
     const [passwordReg,setPasswordReg] = useState("");
+    const [nicknameReg,setNicknameReg] = useState("");
     let history = useHistory();
     const signup = () =>{
-        const data = {username:usernameReg, password: passwordReg}
+        const data = {username:usernameReg, password: passwordReg, nickname : nicknameReg}
         axios.post("http://localhost:3001/register",data).then((response) => {
                 alert(response.data)
                 history.push('/Login')
@@ -26,6 +27,17 @@ function Registration() {
                     </div>
                 </div>
                 <div class="input-element">
+                    <label for="accname">Nick Name</label>
+                    <input class="input-field" 
+                        type="text" id="accname" 
+                        name="accname" 
+                        placeholder="Account Name" 
+                        required 
+                        onChange = {(e) => {
+                            setNicknameReg(e.target.value);
+                        }} />
+                </div>
+                <div class="input-element">
                     <label for="accname">Account Name</label>
                     <input class="input-field" 
                         type="text" id="accname" 
@@ -38,7 +50,7 @@ function Registration() {
                 </div>
                 <div class="input-element">
                     <label for="psw">Password</label>
-                    <input class="input-field" type="password" id="psw" name="psw" placeholder="Password" required minlength="3" maxlength="8"/>
+                    <input class="input-field" type="password" id="psw" name="psw" placeholder="Password" required minlength="3" maxlength="20"/>
                 </div>
                 <div class="input-element">
                     <label for="psw-confirm">Confirm Password</label>

@@ -35,7 +35,20 @@ function NewDetails() {
             accessToken : localStorage.getItem("accessToken")
         }}).then(res =>{
           setListofCommnents([res, ...listOfComments])
+          setActiveCommnents(null)
         });  
+    }
+    const UpdateComment = (text,comment_id) =>{
+        const data = {bodyComment:text, comment_id: comment_id}
+        axios.post("http://localhost:3001/UpdateComment",data).then(()=>{
+            const updatedListOfComments = listOfComments.map((comment)=>{
+                if (comment.comment_id === comment_id){
+                    return {...comment, bodyComment: text}
+                }
+                return comment;
+            })
+            setListofCommnents(updatedListOfComments)
+        });
     }
     const DeleteComment = (comment_id) => {
         if (window.confirm("Are you sure want to remove a comment?")){
@@ -115,9 +128,9 @@ function NewDetails() {
                 <section class="article__comment">
                     <div class="comment__reply">
                         <div class="acc__shape">
-                            <img src="./img/ava2.jpg" alt="ava1" class="acc__ava"/>
+                            <img src="https://st.quantrimang.com/photos/image/2020/02/22/avatar-den-co-don-9.png" alt="ava1" class="acc__ava"/>
                         </div>
-                        <CommentForm submitLabel="Write" handleSubmit = {CreateComment}/>
+                        <CommentForm submitLabel="Write" handleSubmit = {CreateComment} hasCancelButton/>
                     </div>
                     {rootComments.map((value)=>{
                         return(
@@ -128,7 +141,8 @@ function NewDetails() {
                             deleteComment = {DeleteComment}
                             activeComment = {activeComment}
                             setActiveComment = {setActiveCommnents}
-                            addComment = {CreateComment}
+                            createComment = {CreateComment}
+                            updateComment = {UpdateComment}
                             /> 
                         )
                     })}

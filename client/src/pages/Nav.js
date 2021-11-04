@@ -1,9 +1,6 @@
-import React, { useEffect,useContext } from 'react'
-import {Link,BrowserRouter as Router,Route,Switch} from 'react-router-dom'
+import React, {useContext } from 'react'
+import {Link} from 'react-router-dom'
 import { AuthContext } from '../helpers/AuthContext';
-import { useState } from 'react';
-import axios from 'axios';
-
 
 function Nav() {
        
@@ -13,6 +10,7 @@ function Nav() {
         setAuthState({
             username: "",
             id: 0,
+            nickname: "",
             status: false
         })
     }

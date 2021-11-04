@@ -18,19 +18,16 @@ function Login() {
             alert(response.data.error)
           }
         localStorage.setItem("accessToken",response.data.token)
+        console.log(response.data.nick_name)
         setAuthState({
             username: response.data.username,
             id: response.data.id,
+            nickname: response.data.nick_name,
             status: true,
           });
     })
     history.push('/')
   }
-  const test = () =>{
-    history.push('/')
-  }
-  
-
     return (
       <div class ="login">
         <main>
@@ -65,7 +62,7 @@ function Login() {
                     <button type="submit" class="btn" onClick = {login}>Login</button>
                     <div class="suggest">
                         <span>Don't you have an account <Link to="/Signup">Sign up</Link></span>
-                        <span><a href="#" onClick={test}>Forgot you password?</a></span>
+                        <span><a href="#" >Forgot you password?</a></span>
                     </div>
                 </form>
             </section>

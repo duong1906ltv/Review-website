@@ -17,6 +17,7 @@ function App() {
   const [authState,setAuthState] = useState({
       username: "",
       id: 0,
+      nickname: "",
       status: false
   })
 
@@ -30,12 +31,12 @@ function App() {
               setAuthState({
                   username: response.data.username,
                   id: response.data.id,
+                  nickname:response.data.nick_name,
                   status: true
               });
           }
       })
-
-  })
+   })
   return (
     <div>
     <AuthContext.Provider value = {{authState,setAuthState}}> 
@@ -51,7 +52,6 @@ function App() {
         <Route path="/Posts/:id" exact component = {PostByID}/>
         <Route path="/Details" exact component = {NewDetails}/>
         <Route path="/WriteReview" exact component = {WriteReview}/>
-        {/* <Route path="/Test" exact component = {Test}/> */}
       </Switch>
     </Router>
     </AuthContext.Provider>

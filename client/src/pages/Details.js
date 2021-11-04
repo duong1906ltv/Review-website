@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import Comment from '../component/Comment'
 
-function Details() {
+function Details() {   
     const [listOfComments, setListofCommnents] = useState([])
     const [bodyComment, setBodyComment] = useState([])
     
