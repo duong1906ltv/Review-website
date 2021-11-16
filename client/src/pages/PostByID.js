@@ -180,7 +180,7 @@ function PostByID() {
                     <label for="popular-tab" class="p2-aside__tab"><h3 class="p2-heading-3">Phổ biến</h3></label>
                     <label for="newest-tab" class="p2-aside__tab"><h3 class="p2-heading-3">Gần đây</h3></label>
                 </div>
-                <input type="radio" id="popular-tab" name="aside-tab" class="p2-popular-tab" checked/>
+                <input type="radio" id="popular-tab" name="aside-tab" class="p2-popular-tab"/>
                 <input type="radio" id="newest-tab" name="aside-tab" class="p2-newest-tab"/>
                 <section class="p2-aside__section p2-aside__section--popular">
                     <div class="p2-aside__item">
