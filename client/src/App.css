@@ -214,9 +214,25 @@ a:visited {
   margin: 2rem auto;
 }
 
-.p2-carousel {
-  height: 40rem;
+.p2-chat__nav {
+  height: 20rem;
   background-color: wheat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://wallpapers.com/images/high/travel-wallpaper-hd-a1xfaokw4tj8k6mn.jpg");
+  background-repeat: none;
+  background-position: center;
+}
+
+.p2-chat__link {
+  display: block;
+  padding: 1rem;
+  width: 60%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: black;
+  border-radius: 3rem;
 }
 
 .p2-content {
@@ -342,7 +358,7 @@ a:visited {
 
 .p2-popular-tab:checked ~ .p2-aside__section--newest {
   display: none;
-} 
+}
 
 .p2-newest-tab:checked ~ .p2-aside__section--newest {
   display: block;
@@ -2075,13 +2091,11 @@ body {
   }
 }
 
-
-
-.new_classssss{
+.new_classssss {
   display: block;
   width: 33%;
 }
-.newimageclass{
+.newimageclass {
   width: 100%;
   border-radius: 1rem;
 }
